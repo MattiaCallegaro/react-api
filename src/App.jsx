@@ -9,11 +9,13 @@ function App() {
   const fetchActresses = () => {
     axios
       .get("https://lanciweb.github.io/demo/api/actresses/")
-      .then((response) => console.log(response.data))
+      .then((response) => setActresses(response.data))
 
   }
 
-  useEffect(fetchActresses);
+  useEffect(() => {
+    fetchActresses()
+  }, [])
 
 
 
@@ -27,6 +29,21 @@ function App() {
               <h1>Actresses list</h1>
             </div>
           </div>
+          {actresses.map((actress) => (
+            <div className="col-12 col-md-6 col-lg-4"
+              key={`actresses-${actress.id}`}>
+              <div className="card mb-4">
+                <img src= alt="" className="card-img-top" />
+                <div className="card-body">
+                  <h5 className="card-title"></h5>
+                  <p className="card-text"></p>
+                  <p className="card-text"></p>
+                  <p className="card-text"></p>
+                </div>
+              </div>
+
+            </div>
+          ))}
         </div>
       </div>
 
