@@ -33,12 +33,13 @@ function App() {
             <div className="col-12 col-md-6 col-lg-4"
               key={`actresses-${actress.id}`}>
               <div className="card mb-4">
-                <img src= alt="" className="card-img-top" />
+                <img src={actress.image} alt="" className="card-img-top" />
                 <div className="card-body">
-                  <h5 className="card-title"></h5>
-                  <p className="card-text"></p>
-                  <p className="card-text"></p>
-                  <p className="card-text"></p>
+                  <h5 className="card-title">{actress.name}</h5>
+                  <p className="card-text">{actress.birth_year}</p>
+                  <p className="card-text">{actress.nationality}</p>
+                  <p className="card-text">{actress.biography}</p>
+                  <p className="card-text">{actress.awards}</p>
                 </div>
               </div>
 
