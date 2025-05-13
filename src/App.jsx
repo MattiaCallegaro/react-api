@@ -3,33 +3,30 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 function App() {
-  const [actresses, setActresses] = useState([])
-  const [actors, setActors] = useState([])
+  //bonus 2 creo una nuova variabile di stato+
+  const [people, setPeople] = useState([])
 
   //creo una funzione per la chiamata ajax con axios
-  const fetchActresses = () => {
+  const fetchPeople = () => {
     axios
       .get("https://lanciweb.github.io/demo/api/actresses/")
-      .then((response) => setActresses(response.data))
+      .then((response) => {
+        const actresses = response.data
+
+        axios
+          .get("https://lanciweb.github.io/demo/api/actors/")
+          .then((response) => {
+            const actors = response.data
+            setPeople([...actresses, ...actors])
+          })
+
+      })
 
   }
 
   useEffect(() => {
-    fetchActresses()
+    fetchPeople()
   }, [])
-
-
-  const fetchActors = () => {
-    axios
-      .get("https://lanciweb.github.io/demo/api/actors/")
-      .then((response) => setActors(response.data))
-
-  }
-
-  useEffect(() => {
-    fetchActors()
-  }, [])
-
 
 
 
@@ -44,17 +41,17 @@ function App() {
                 <h1>Actresses list</h1>
               </div>
             </div>
-            {actresses.map((actress) => (
+            {people.map((person) => (
               <div className=" mb-4 col-12 col-md-6 col-lg-4"
-                key={`actresses-${actress.id}`}>
+                key={`person-${person.id}`}>
                 <div className="card  h-100 mt-4">
-                  <img src={actress.image} alt="" className="card-img-top" />
+                  <img src={person.image} alt="" className="card-img-top" />
                   <div className="card-body ">
-                    <h5 className="card-title">{actress.name}</h5>
-                    <p className="card-text">{actress.birth_year}</p>
-                    <p className="card-text">{actress.nationality}</p>
-                    <p className="card-text">{actress.biography}</p>
-                    <p className="card-text">{actress.awards}</p>
+                    <h5 className="card-title">{person.name}</h5>
+                    <p className="card-text">{person.birth_year}</p>
+                    <p className="card-text">{person.nationality}</p>
+                    <p className="card-text">{person.biography}</p>
+                    <p className="card-text">{person.awards}</p>
                   </div>
                 </div>
 
@@ -66,7 +63,7 @@ function App() {
 
 
 
-      <div className="bg-light min-vh-100">
+      {/* <div className="bg-light min-vh-100">
         <div className="container mt-4 ">
           <div className="row ">
             <div className="col-12">
@@ -92,7 +89,7 @@ function App() {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   )
 }
