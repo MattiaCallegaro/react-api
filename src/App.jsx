@@ -11,8 +11,9 @@ function App() {
     axios
       .get("https://lanciweb.github.io/demo/api/actresses/")
       .then((response) => {
+        //bonus 2 effettuo la chiamata attrici e la assegno ad una variabile
         const actresses = response.data
-
+        //bonus 2 effettuo una chiamata per attori ma spalmo i due array su uno nuovo people
         axios
           .get("https://lanciweb.github.io/demo/api/actors/")
           .then((response) => {
